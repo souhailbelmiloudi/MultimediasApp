@@ -1,0 +1,18 @@
+Options +FollowSymLinks
+RewriteEngine On
+
+RewriteRule ^/?$ ./controladores/index.php [L]
+
+
+# Evitar que se aplique a archivos y directorios reales
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# Rutas amigables para páginas específicas
+RewriteRule ^([A-Za-z0-9-]+)/?$ ./controladores/index.php?page=$1 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+# Rutas amigables para editar y borrar elementos
+RewriteRule ^(editar|borrar)/([A-Za-z]+)/([0-9]+)/?$ ./controladores/index.php?page=$1&tipo=$2&id=$3 [L]
+
